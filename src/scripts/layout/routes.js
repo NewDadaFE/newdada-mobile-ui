@@ -1,9 +1,9 @@
 export default[
     {
-        "title": "Base",
+        "title": "Basic",
         "children": [
             {
-                "path": "/button",
+                "path": "/index/button",
                 "name": "Button",
                 "icon": "hand-pointer-o"
             },
@@ -13,51 +13,66 @@ export default[
                 "icon": "flag"
             },
             {
-                "path": "/cell",
-                "name": "Group && Cell",
-                "icon": "list"
+                "path": "/image",
+                "name": "Image",
+                "icon": "picture-o"
             },
             {
-                "path": "/flex",
-                "name": "Flex && FlexItem",
-                "icon": "th"
+                "path": "/table",
+                "name": "Table",
+                "icon": "table"
             },
             {
-                "path": "/tag",
-                "name": "Tag",
-                "icon": "tag"
-            },
-            {
-                "path": "/badge",
-                "name": "Badge",
-                "icon": "bell-o"
-            },
-            {
-                "path": "/hrule",
-                "name": "HRule(Hr)",
-                "icon": "minus"
-            },
-            {
-                "path": "/tip",
-                "name": "Tip",
-                "icon": "paperclip"
-            },
-            {
-                "path": "/card",
-                "name": "Card",
-                "icon": "file-image-o"
-            },
-            {
-                "path": "/media",
-                "name": "Media",
-                "icon": "id-card-o"
-            },
-            {
-                "path": "/swipe",
-                "name": "Swipe",
-                "icon": "newspaper-o"
+                "path": "/layout",
+                "name": "Layout",
+                "icon": "columns"
             }
         ]
+    },
+    {
+      "title":"Form Control",
+      "children":[
+        {
+          "path": "/radio",
+          "name": "Radio",
+          "icon": "dot-circle-o"
+        },
+        {
+          "path": "/checkbox",
+          "name": "Checkbox",
+          "icon": "check-square"
+        },
+        {
+          "path": "/switch",
+          "name": "Switch",
+          "icon": "toggle-on"
+        },
+        {
+          "path": "/select",
+          "name": "Select",
+          "icon": "angle-down"
+        },
+        {
+          "path": "/input",
+          "name": "Input",
+          "icon": "search"
+        },
+        {
+          "path": "/form",
+          "name": "Hot",
+          "icon": "offset-l"
+        },
+        {
+          "path": "/input-group",
+          "name": "InputGroup",
+          "icon": "outdent"
+        },
+        {
+          "path": "/upload",
+          "name": "Upload",
+          "icon": "cloud-upload"
+        }
+      ]
     },
     {
         "title": "Layout",

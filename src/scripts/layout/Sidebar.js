@@ -30,27 +30,26 @@ export default class AppSidebar extends Component {
 
         return (
           <Sidebar>
-              <Sidebar.Header />
+              <Sidebar.Header>UI</Sidebar.Header>
               <Sidebar.Body>
-              {
-                routesConfig.map(group => {
-                  return (
-                    <Nav>
-                      <div className="nav-title">
-                      <Button theme="" onClick={this.onClickHandle}>{group.title}
-                      </Button>
-                      </div>
-                      {
-                        group.children.map(item => {
-                          return (
-                            <Nav.Link><Link to={item.path}><Icon type={item.icon} left />{item.name}</Link></Nav.Link>
-                          );
-                        })
-                      }
-                    </Nav>
-                  );
-                })
-              }
+                <Nav>
+                  {
+                    routesConfig.map(group => {
+                      return (
+                        <div>
+                          <Nav.Title>{group.title}</Nav.Title>
+                          {
+                            group.children.map(item => {
+                              return (
+                                <Nav.Link><Link to={item.path}><Icon type={item.icon} left />{item.name}</Link></Nav.Link>
+                              );
+                            })
+                          }
+                          </div>
+                      );
+                    })
+                  }
+                </Nav>
               </Sidebar.Body>
           </Sidebar>
         );
