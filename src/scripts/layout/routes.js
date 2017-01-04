@@ -3,7 +3,7 @@ export default[
         "title": "Basic",
         "children": [
             {
-                "path": "/index/button",
+                "path": "/button",
                 "name": "Button",
                 "icon": "hand-pointer-o"
             },
