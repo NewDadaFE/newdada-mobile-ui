@@ -1,6 +1,6 @@
 module.exports = {
     source: [
-        './docs',
+        './posts',
     ], // makerdown 原文件目录
     output: './_site', // 输出文件
     lazyLoad: false,
@@ -8,10 +8,10 @@ module.exports = {
     port: 8000,
     doraConfig: {},
     webpackConfig(config) { // webpack 配置文件
-        config.externals = {
-            react: 'React',
-            'react-dom': 'ReactDOM',
-        };
+        // config.externals = {
+        //     react: 'React',
+        //     'react-dom': 'ReactDOM',
+        // };
         return config;
     },
 
@@ -19,6 +19,7 @@ module.exports = {
     root: '/',
     plugins: [ // 插件
         'bisheng-plugin-description',
+        'bisheng-plugin-react'
     ],
     pick: {
         posts(markdownData) {
