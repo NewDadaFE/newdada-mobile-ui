@@ -12,6 +12,7 @@
     "publish": "npm run build"
   },
   "dependencies": {
+    "antd": "^2.6.1",
     "classnames": "^2.2.5",
     "es6-promise": "^3.3.1",
     "highlight.js": "^9.9.0",
