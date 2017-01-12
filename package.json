@@ -7,7 +7,6 @@
     "dev": "gulp && webpack-dev-server --config webpack.dev.config.js --open --colors --port 9008",
     "watch": "gulp watch",
     "doc": "bisheng start -c ./site/bisheng.config.js --no-livereload",
-    "testdoc": "bisheng start",
     "prebuild": "npm run eslint && gulp prod",
     "build": "webpack -p --config webpack.prod.config.js",
     "publish": "npm run build"

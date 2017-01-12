@@ -3,8 +3,8 @@ module.exports = {
         './posts',
     ], // makerdown 原文件目录
     output: './_site', // 输出文件
-    lazyLoad: false,
-    theme: './_theme', // 主题文件
+    lazyLoad: true,
+    theme: './site/_theme', // 主题文件
     port: 8000,
     doraConfig: {},
     webpackConfig(config) { // webpack 配置文件
