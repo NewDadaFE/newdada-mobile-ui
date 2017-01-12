@@ -3,7 +3,7 @@ module.exports = {
         './posts',
         './docs',
     ], // makerdown 原文件目录
-    lazyLoad: true,
+    lazyLoad: false,
     root: '/',
     plugins: ['bisheng-plugin-description'],
     pick: {
