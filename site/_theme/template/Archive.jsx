@@ -50,14 +50,3 @@ export default (props) => {
     </DocumentTitle>
   );
 }
-
-// TODO
-// <div class="pagination">
-//   {%- if pagination.has_prev %}
-//   <a class="newer" href="{{ pagination_url(pagination.prev_num) }}">Newer</a>
-//   {%- endif %}
-
-//   {%- if pagination.has_next %}
-//   <a class="older" href="{{ pagination_url(pagination.next_num) }}">Older</a>
-//   {%- endif %}
-// </div>

@@ -1,6 +1,7 @@
 module.exports = {
     source: [
         './posts',
+        './docs'
     ], // makerdown 原文件目录
     output: './_site', // 输出文件
     lazyLoad: true,
