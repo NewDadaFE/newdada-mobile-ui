@@ -19,6 +19,7 @@ const zhLocale = {
     },
 };
 
+const contentTmpl = './template/Content/index';
 
 module.exports = {
     home: '/',
@@ -31,9 +32,15 @@ module.exports = {
         path: '/',
         component: './template/Layout/index',
         indexRoute: { component: './template/Home/index' },
-        childRoutes: [{
-            path: '/docs/:children',
-            component: './template/Archive'
-        }],
+        childRoutes: [
+            {
+                path: '/docs/:children',
+                component: contentTmpl
+            },
+            {
+                path: '/posts/:children',
+                component: contentTmpl
+            },
+        ],
     },
 };

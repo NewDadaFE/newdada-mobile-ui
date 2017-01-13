@@ -1,49 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router';
-import DocumentTitle from 'react-document-title';
+import Promise from 'bluebird';
+import MainContent from './MainContent';
 
-function getTime(date) {
-  return (new Date(date)).getTime();
-}
+// locale copy from layout
+const locale = (
+  window.localStorage &&
+    localStorage.getItem('locale') !== 'en-US'
+) ? 'zh-CN' : 'en-US';
 
-export default (props) => {
-  const toReactComponent = props.utils.toReactComponent;
-  const posts = props.picked.posts
-          .sort((a, b) => getTime(b.meta.publishDate) - getTime(a.meta.publishDate));
+export function collect(nextProps, callback) {
+  const pageData = nextProps.location.pathname === 'changelog' ?
+    nextProps.data.CHANGELOG : nextProps.pageData;
+  const pageDataPromise = typeof pageData === 'function' ?
+    pageData() : (pageData[locale] || pageData.index[locale] || pageData.index)();
+  const promises = [pageDataPromise];
 
-  let year = NaN;
-  const entryList = [];
-  posts.forEach(({ meta, description }, index) => {
-    const publishYear = meta.publishDate.slice(0, 4);
-    if (year !== publishYear) {
-      year = publishYear;
-      entryList.push(
-        <a className="item-year" href={`#${publishYear}`} key={publishYear} id={publishYear}>
-          {publishYear}
-        </a>);
-    }
-
-    entryList.push(
-      <div className="item" key={index}>
-        <h2 className="item-title" id={meta.title}>
-          <time>{`${meta.publishDate.slice(0, 10)} `}</time>
-          <Link to={`/${meta.filename.replace(/\.md$/i, '')}`}>{meta.title}</Link>
-        </h2>
-        {
-          !description ? null :
-            <div className="item-description">
-              { toReactComponent(description) }
-            </div>
-        }
-      </div>
-    );
-  })
-  return (
-    <DocumentTitle title="BiSheng Theme One">
-        <h1 className="entry-title">Archive</h1>
-        <div className="entry-list">
-          {entryList}
-        </div>
-    </DocumentTitle>
+  const pathname = nextProps.location.pathname;
+  const demos = nextProps.utils.get(
+    nextProps.data, [...pathname.split('/'), 'demo']
   );
+  if (demos) {
+    promises.push(demos());
+  }
+  Promise.all(promises)
+    .then((list) => callback(null, {
+      ...nextProps,
+      localizedPageData: list[0],
+      demos: list[1],
+    }));
 }
+
+export default (props) => (
+  <MainContent {...props} />
+);
