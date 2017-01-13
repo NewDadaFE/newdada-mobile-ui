@@ -1,23 +1,39 @@
+const enLocaleData = require('react-intl/locale-data/en')
+const zhLocaleData = require('react-intl/locale-data/zh')
+const enLocale = {
+    locale: 'en-US',
+    data: enLocaleData,
+    message: {
+        'app.header.menu.home': 'Home',
+        'app.header.menu.vue': 'Vue',
+        'app.header.lang': '中文',
+    },
+};
+const zhLocale = {
+    locale: 'zh-CN',
+    data: enLocaleData,
+    message: {
+        'app.header.menu.home': '首页',
+        'app.header.menu.vue': '组件',
+        'app.header.lang': 'EN',
+    },
+};
+
+
 module.exports = {
-  home: '/',
-  sitename: 'One',
-  // tagline: 'The one theme for bisheng',
-  // navigation: [{
-  //   title: 'BiSheng',
-  //   link: 'https://github.com/benjycui/bisheng',
-  // }],
-  // footer: 'Copyright and so on...',
-  // hideBisheng: true,
-  github: 'https://github.com/benjycui/bisheng-theme-one',
-  routes: [{
-    path: '/',
-    component: './template/Archive',
-  }, {
-    path: '/posts/:post',
-    component: './template/Post',
-  }, {
-    path: '/tags',
-    component: './template/TagCloud',
-    dataPath: '/',
-  }],
+    home: '/',
+    sitename: 'NewDadaFE',
+    siteTitle: 'Mobile UI',
+    github: 'https://github.com/NewDadaFE/newdada-mobile-ui',
+    enLocale,
+    zhLocale,
+    routes: {
+        path: '/',
+        component: './template/Layout/index',
+        indexRoute: { component: './template/Home/index' },
+        childRoutes: [{
+            path: '/docs/:children',
+            component: './template/Archive'
+        }],
+    },
 };

@@ -23,6 +23,12 @@ module.exports = {
         'bisheng-plugin-react'
     ],
     pick: {
+        docs(markdownData) {
+            return {
+                meta: markdownData.meta,
+                description: markdownData.description,
+            };
+        },
         posts(markdownData) {
             return {
                 meta: markdownData.meta,

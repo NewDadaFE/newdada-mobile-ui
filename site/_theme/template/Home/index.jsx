@@ -51,14 +51,14 @@ export default class Home extends React.Component {
                         </div>
                     </div>
                     <div className="banner-text-wrapper">
-                        <h2 key="h2">移动端设计指南&前端框架</h2>
+                        <h2 key="h2">移动端组件库&前端框架</h2>
                         <div>
                           设计、前端高效协同，快速搭建移动端组件库
                           <GitHubButton
                               key="github-button"
                               type="stargazers"
-                              namespace="ant-design"
-                              repo="ant-design-mobile"
+                              namespace="NewDadaFE"
+                              repo="newdada-mobile-ui"
                           />
                         </div>
                         <div className="start-button-wrap" key="button">
