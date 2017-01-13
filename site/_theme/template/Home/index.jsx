@@ -20,6 +20,25 @@ export default class Home extends React.Component {
         return (
             <DocumentTitle title={title}>
                 <div className="home-main">
+
+                    <div className="banner-text-wrapper">
+                        <h2 key="h2">移动端组件库&前端框架</h2>
+                        <div>
+                          设计、前端高效协同，快速搭建移动端组件库
+                          <GitHubButton
+                              key="github-button"
+                              type="stargazers"
+                              namespace="NewDadaFE"
+                              repo="newdada-mobile-ui"
+                          />
+                        </div>
+                        <div className="start-button-wrap" key="button">
+                            <Link to="/docs/react/introduce">
+                                开始探索
+                            </Link>
+                        </div>
+                    </div>
+
                     <div className="home-iframe">
                         <div style={{ width: '377Px', height: '620Px' }}>
                             <div className="demo-preview-wrapper">
@@ -48,23 +67,6 @@ export default class Home extends React.Component {
                                     />
                                 </section>
                             </div>
-                        </div>
-                    </div>
-                    <div className="banner-text-wrapper">
-                        <h2 key="h2">移动端组件库&前端框架</h2>
-                        <div>
-                          设计、前端高效协同，快速搭建移动端组件库
-                          <GitHubButton
-                              key="github-button"
-                              type="stargazers"
-                              namespace="NewDadaFE"
-                              repo="newdada-mobile-ui"
-                          />
-                        </div>
-                        <div className="start-button-wrap" key="button">
-                            <Link to="/docs/react/introduce">
-                                开始探索
-                            </Link>
                         </div>
                     </div>
                 </div>
