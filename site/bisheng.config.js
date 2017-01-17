@@ -1,26 +1,36 @@
+const path = require('path')
+
 module.exports = {
     source: [
         './posts',
         './docs'
     ], // makerdown 原文件目录
     output: './_site', // 输出文件
-    lazyLoad: true,
+    lazyLoad: false,
     theme: './site/_theme', // 主题文件
     port: 8000,
-    doraConfig: {},
+    doraConfig: { verbose: true },
+    htmlTemplate: path.join(__dirname, './_theme/static/template.html'),
     webpackConfig(config) { // webpack 配置文件
-        // config.externals = {
-        //     react: 'React',
-        //     'react-dom': 'ReactDOM',
-        // };
+        config.externals = {
+            react: 'React',
+            'react-dom': 'ReactDOM',
+        };
+
+        config.babel.plugins.push([
+            'babel-plugin-transform-runtime',
+            {
+                polyfill: false,
+                regenerator: true,
+            },
+        ])
         return config;
     },
-
-    entryName: 'index',
     root: '/',
     plugins: [ // 插件
         'bisheng-plugin-description',
-        'bisheng-plugin-react'
+        'bisheng-plugin-toc?maxDepth=2',
+        'bisheng-plugin-antd'
     ],
     pick: {
         docs(markdownData) {
