@@ -128,11 +128,11 @@ export default class ComponentDoc extends React.Component {
 	  'code-box-expand-trigger-active': expand,
 	});
 
-	const protocol = window.location.protocol;
+	const protocol = 'http:';
 	const path = doc.meta.filename.split('/')[1];
 	const isLocalMode = window.location.port;
-	const host = isLocalMode ? 'localhost:8002' : window.location.host;
-	const demoUrl = `${protocol}/${host}/kitchen-sink/${path}/`;
+	const host = 'newdadafe.github.io';
+	const demoUrl = `${protocol}/${host}/${path}/`;
 
 	const PopoverContent = (<div>
 	  <h4 style={{ margin: '8Px 0 12Px' }}>扫二维码查看演示效果</h4>
@@ -140,9 +140,7 @@ export default class ComponentDoc extends React.Component {
 	</div>);
 
 	const { title, subtitle, chinese, english } = meta;
-	const iframeUrl = currentIndex === 0 ?
-			`${protocol}//${host}${isLocalMode ? '' : '/kitchen-sink'}/${path}/#${path}-demo-${currentIndex}` :
-			`${protocol}//${host}${isLocalMode ? '' : '/kitchen-sink'}/${path}/#${path}-demo-${currentIndex}`;
+	const iframeUrl = `${protocol}//${host}/impression_vue/#/${path}`;
 	return (
 	  <DocumentTitle title={`${subtitle || chinese || ''} ${title || english} - Ant Design`}>
 		<article>

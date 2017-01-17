@@ -29,6 +29,24 @@ module.exports = {
     github: 'https://github.com/NewDadaFE/newdada-mobile-ui',
     enLocale,
     zhLocale,
+    categoryOrder: {
+        Layout: 0,
+        Navigation: 1,
+        'Data Entry': 2,
+        'Data Display': 3,
+        Feedback: 4,
+        Combination: 6,
+        Gesture: 5,
+    },
+      typeOrder: {
+        Layout: 0,
+        Navigation: 1,
+        'Data Entry': 2,
+        'Data Display': 3,
+        Feedback: 4,
+        Gesture: 5,
+        Combination: 6,
+    },
     routes: {
         path: '/',
         component: './template/Layout/index',
@@ -39,7 +57,7 @@ module.exports = {
                 component: contentTmpl
             },
             {
-                path: '/posts/:children',
+                path: '/components/:children',
                 component: contentTmpl
             },
         ],

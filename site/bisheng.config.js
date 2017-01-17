@@ -2,8 +2,8 @@ const path = require('path')
 
 module.exports = {
     source: [
-        './posts',
-        './docs'
+        './docs',
+        './components'
     ], // makerdown 原文件目录
     output: './_site', // 输出文件
     lazyLoad(nodePath, nodeValue) {
@@ -42,14 +42,18 @@ module.exports = {
         docs(markdownData) {
             return {
                 meta: markdownData.meta,
-                description: markdownData.description,
             };
         },
-        posts(markdownData) {
-            return {
-                meta: markdownData.meta,
-                description: markdownData.description,
+        components(markdownData) {
+            const filename = markdownData.meta.filename;
+
+            if (!/^components/.test(filename) ||
+                /\/demo$/.test(path.dirname(filename))) return;
+              /* eslint-disable consistent-return */
+              return {
+                  meta: markdownData.meta,
             };
+            /* eslint-enable consistent-return */
         },
     },
 };

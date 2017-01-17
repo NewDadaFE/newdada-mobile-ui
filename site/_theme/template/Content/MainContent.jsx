@@ -109,13 +109,14 @@ export default class MainContent extends React.Component {
   getModuleData() {
     const props = this.props;
     const pathname = props.location.pathname;
-    // const moduleName = /^components/.test(pathname) ?
-    //   'components' : pathname.split('/').slice(0, 2).join('/');
-    // return moduleName === 'components' || moduleName === 'changelog' || moduleName === 'docs/react' ?
-    //   [...props.picked.components, ...props.picked['docs/react'], ...props.picked.changelog] :
-    //   props.picked[moduleName];
+    console.log(pathname);
+    const moduleName = /^components/.test(pathname) ?
+      'components' : pathname.split('/').slice(0, 1).join('/');
 
-    return [...props.picked.posts, ...props.picked.docs]
+      console.log("moduleName", moduleName);
+    return moduleName === 'components' || moduleName === 'docs' ?
+      [...props.picked.components, ...props.picked.docs] :
+      props.picked[moduleName];
   }
 
   getMenuItems() {

@@ -8,3 +8,4 @@ import './demo.less';
 import './page-nav.less';
 import './not-found.less';
 import './highlight.less';
+import './markdown.less';

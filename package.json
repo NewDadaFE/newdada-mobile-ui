@@ -1,18 +1,14 @@
 {
   "version": "0.1.0",
   "scripts": {
-    "start": "bisheng start -c ./site/bisheng.config.js --no-livereload",
-    "eslint": "eslint --fix src/scripts",
-    "scsslint": "scss-lint src/styles/**/*.scss",
-    "prebuild": "npm run eslint && gulp prod",
-    "build": "webpack -p --config webpack.prod.config.js",
-    "publish": "npm run build"
+    "start": "bisheng start -c ./site/bisheng.config.js --no-livereload"
   },
   "dependencies": {
     "antd": "^2.6.1",
     "bluebird": "^3.4.7",
     "classnames": "^2.2.5",
     "eslint": "^3.13.1",
+    "highlight.js": "^9.9.0",
     "jsonml.js": "^0.1.0",
     "moment": "^2.14.1",
     "qrcode.react": "^0.6.1",
@@ -34,12 +30,16 @@
     "babel-runtime": "^6.18.0",
     "bisheng": "^0.18.3",
     "bisheng-plugin-description": "^0.1.1",
+    "bisheng-plugin-toc": "^0.4.0",
+    "bisheng-plugin-antd": "^0.7.2",
+    "bisheng-plugin-react": "^0.3.1",
     "eslint": "^3.13.1",
     "eslint-config-impression": "^1.0.0",
     "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-flow-vars": "^0.4.0",
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-jsx-a11y": "^2.2.1",
+    "eslint-plugin-markdown": "^1.0.0-beta.3",
     "eslint-plugin-react": "^6.2.0",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.21.0",

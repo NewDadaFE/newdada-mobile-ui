@@ -86,11 +86,11 @@ export default class Header extends React.Component {
 
   render() {
     const { location, picked } = this.props;
-    const components = picked.posts;
+    const components = picked.components;
     const module = location.pathname.split('/').slice(0, -1).join('/');
     let activeMenuItem = module || 'home';
 
-    if (activeMenuItem === 'components' || activeMenuItem === 'docs/react' || location.pathname === 'changelog') {
+    if (activeMenuItem === 'components') {
       activeMenuItem = 'components';
     }
 
