@@ -1,5 +1,5 @@
 import React from 'react';
-import Promise from 'bluebird';
+import Promise from 'bluebird'; // promise 增强库
 import MainContent from './MainContent';
 
 // locale copy from layout
@@ -29,6 +29,7 @@ export function collect(nextProps, callback) {
       demos: list[1],
     }));
 }
+
 
 export default (props) => (
   <MainContent {...props} />
