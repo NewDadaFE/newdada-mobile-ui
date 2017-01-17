@@ -1,9 +1,10 @@
 const enLocaleData = require('react-intl/locale-data/en')
 const zhLocaleData = require('react-intl/locale-data/zh')
+
 const enLocale = {
     locale: 'en-US',
     data: enLocaleData,
-    message: {
+    messages: {
         'app.header.menu.home': 'Home',
         'app.header.menu.vue': 'Vue',
         'app.header.lang': '中文',
@@ -11,8 +12,8 @@ const enLocale = {
 };
 const zhLocale = {
     locale: 'zh-CN',
-    data: enLocaleData,
-    message: {
+    data: zhLocaleData,
+    messages: {
         'app.header.menu.home': '首页',
         'app.header.menu.vue': '组件',
         'app.header.lang': 'EN',

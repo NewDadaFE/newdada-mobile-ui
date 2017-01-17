@@ -105,14 +105,17 @@ export default class MainContent extends React.Component {
     return [...topLevel, ...itemGroups];
   }
 
+  //  配置的文档目录
   getModuleData() {
     const props = this.props;
     const pathname = props.location.pathname;
-    const moduleName = /^components/.test(pathname) ?
-      'components' : pathname.split('/').slice(0, 2).join('/');
-    return moduleName === 'components' || moduleName === 'changelog' || moduleName === 'docs/react' ?
-      [...props.picked.components, ...props.picked['docs/react'], ...props.picked.changelog] :
-      props.picked[moduleName];
+    // const moduleName = /^components/.test(pathname) ?
+    //   'components' : pathname.split('/').slice(0, 2).join('/');
+    // return moduleName === 'components' || moduleName === 'changelog' || moduleName === 'docs/react' ?
+    //   [...props.picked.components, ...props.picked['docs/react'], ...props.picked.changelog] :
+    //   props.picked[moduleName];
+
+    return [...props.picked.posts, ...props.picked.docs]
   }
 
   getMenuItems() {

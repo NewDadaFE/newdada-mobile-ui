@@ -1,4 +1,5 @@
 export function collectDocs(docs) {
+    console.log("docs:", docs);
   // locale copy from layout
   const locale = (window.localStorage && localStorage.getItem('locale') !== 'en-US') ?
         'zh-CN' : 'en-US';

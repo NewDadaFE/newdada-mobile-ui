@@ -8,14 +8,18 @@ const locale = (
     localStorage.getItem('locale') !== 'en-US'
 ) ? 'zh-CN' : 'en-US';
 
+console.log('locale:', locale);
+
 export function collect(nextProps, callback) {
-    const pageData = nextProps.location.pathname === 'changelog' ?
-        nextProps.data.CHANGELOG : nextProps.pageData;
+    console.log('nextProps:', nextProps);
+    const pageData = nextProps.pageData;
     const pageDataPromise = typeof pageData === 'function' ?
         pageData() : (pageData[locale] || pageData.index[locale] || pageData.index)();
     const promises = [pageDataPromise];
 
     const pathname = nextProps.location.pathname;
+
+    console.log("pageData, pageDataPromise", pageData, pageDataPromise);
     const demos = nextProps.utils.get(
         nextProps.data, [...pathname.split('/'), 'demo']
     );

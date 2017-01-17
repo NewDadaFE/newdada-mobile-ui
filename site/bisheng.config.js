@@ -6,14 +6,20 @@ module.exports = {
         './docs'
     ], // makerdown 原文件目录
     output: './_site', // 输出文件
-    lazyLoad: false,
+    lazyLoad(nodePath, nodeValue) {
+        if(typeof nodeValue === 'string') {
+            return true;
+        }
+
+        return nodePath.endsWith('/demo')
+    },
     theme: './site/_theme', // 主题文件
     port: 8000,
     doraConfig: { verbose: true },
     htmlTemplate: path.join(__dirname, './_theme/static/template.html'),
     webpackConfig(config) { // webpack 配置文件
         config.externals = {
-            react: 'React',
+            'react': 'React',
             'react-dom': 'ReactDOM',
         };
 

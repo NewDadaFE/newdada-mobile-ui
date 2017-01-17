@@ -5,3 +5,6 @@ import './footer.less';
 import './header.less';
 import './home.less';
 import './demo.less';
+import './page-nav.less';
+import './not-found.less';
+import './highlight.less';
