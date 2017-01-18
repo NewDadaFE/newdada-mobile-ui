@@ -19,10 +19,11 @@ const appLocale = isZhCN ? config.zhLocale : config.enLocale;
 addLocaleData(appLocale.data);
 
 let gaListenerSetted = false;
+
 export default class Layout extends React.Component {
-  static contextTypes = {
-    router: React.PropTypes.object.isRequired,
-  };
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
 
   componentDidMount() {
     if (typeof ga !== 'undefined' && !gaListenerSetted) {

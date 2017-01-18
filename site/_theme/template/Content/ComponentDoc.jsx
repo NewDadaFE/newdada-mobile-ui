@@ -9,60 +9,62 @@ import { getChildren } from 'jsonml.js/lib/utils';
 import Demo from './Demo';
 
 export default class ComponentDoc extends React.Component {
-	  static contextTypes = {
-			intl: React.PropTypes.object,
-	  }
+    static contextTypes = {
+        intl: React.PropTypes.object,
+    }
 
-  constructor(props) {
-	super(props);
+    constructor(props) {
+        super(props);
 
-	this.state = {
-	  expandAll: false,
-	  currentIndex: this.getIndex(props),
-	  // 收起展开代码的存储数组
-	  codeExpandList: [],
-	  toggle: false,
-	};
-  }
+        this.state = {
+            expandAll: false,
+            currentIndex: this.getIndex(props),
+            // 收起展开代码的存储数组
+            codeExpandList: [],
+            toggle: false,
+        };
+    }
 
-  getIndex(props) {
-	const linkTo = props.location.hash.replace('#', '');
+    getIndex(props) {
+        const linkTo = props.location.hash.replace('#', '');
 
-	const demos = Object.keys(props.demos).map((key) => props.demos[key])
-			.filter((demoData) => !demoData.meta.hidden);
-	const demoSort = demos.sort((a, b) => parseInt(a.meta.order, 10) - parseInt(b.meta.order, 10));
+        const demos = Object.keys(props.demos).map((key) => props.demos[key])
+            .filter((demoData) => !demoData.meta.hidden);
+        const demoSort = demos.sort((a, b) => parseInt(a.meta.order, 10) - parseInt(b.meta.order, 10));
 
-	demos.map((item, index) => {
-	  item.index = index;
-	});
+        demos.map((item, index) => {
+            item.index = index;
+        });
 
-	const linkIndex = linkTo ? demoSort.filter((item) => (item.meta.id === linkTo))[0].index : 0;
-	return linkIndex;
-  }
+        const linkIndex = linkTo ? demoSort.filter((item) => (item.meta.id === linkTo))[0].index : 0;
 
-  componentWillReceiveProps = (nextProps) => {
-	this.setState({
-	  currentIndex: 0,
-	  codeExpandList: [],
-	  toggle: false,
-	});
-	this.initExpandAll(nextProps);
-  }
+        return linkIndex;
+    }
 
-  togglePreview = (e) => {
-	this.setState({
-	  currentIndex: e.index,
-	  toggle: true,
-	});
-  }
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({
+            currentIndex: 0,
+            codeExpandList: [],
+            toggle: false,
+        });
+        this.initExpandAll(nextProps);
+    }
 
-  // 用于控制内部代码的展开和收起
-  handleCodeExpandList = (index, type) => {
-	const codeExpandList = { ...this.state.codeExpandList };
-	codeExpandList[index] = type;
+    togglePreview = (e) => {
+        this.setState({
+            currentIndex: e.index,
+            toggle: true,
+        });
+    }
 
-	this.setState({ codeExpandList });
-  }
+    // 用于控制内部代码的展开和收起
+    handleCodeExpandList = (index, type) => {
+        const codeExpandList = { ...this.state.codeExpandList };
+
+        codeExpandList[index] = type;
+
+        this.setState({ codeExpandList });
+    }
 
   handleExpandToggle = () => {
 	const codeExpandList = {};
@@ -128,21 +130,23 @@ export default class ComponentDoc extends React.Component {
 	  'code-box-expand-trigger-active': expand,
 	});
 
-	const protocol = 'http:';
-	const path = doc.meta.filename.split('/')[1];
-	const isLocalMode = window.location.port;
-	const host = 'newdadafe.github.io';
-	const demoUrl = `${protocol}/${host}/${path}/`;
+    const protocol = 'http:';
+    const path = doc.meta.filename.split('/')[1];
+    const isLocalMode = window.location.port;
+    const host = 'newdadafe.github.io';
+    const demoUrl = `${protocol}/${host}/${path}/`;
 
-	const PopoverContent = (<div>
-	  <h4 style={{ margin: '8Px 0 12Px' }}>扫二维码查看演示效果</h4>
-	  <QRCode size={144} value={demoUrl} />
-	</div>);
+    const PopoverContent = (
+        <div>
+            <h4 style={{ margin: '8Px 0 12Px' }}>扫二维码查看演示效果</h4>
+            <QRCode size={144} value={demoUrl} />
+        </div>
+       );
 
 	const { title, subtitle, chinese, english } = meta;
 	const iframeUrl = `${protocol}//${host}/impression_vue/#/${path}`;
 	return (
-	  <DocumentTitle title={`${subtitle || chinese || ''} ${title || english} - Ant Design`}>
+	  <DocumentTitle title={`${subtitle || chinese || ''} ${title || english} - NewDada UI`}>
 		<article>
 		  <section className="markdown">
 			<h1 className="section-title">

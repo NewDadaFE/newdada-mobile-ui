@@ -33,7 +33,7 @@ export default class Home extends React.Component {
                           />
                         </div>
                         <div className="start-button-wrap" key="button">
-                            <Link to="/docs/introduce">
+                            <Link to="/docs/vue/introduce">
                                 开始探索
                             </Link>
                         </div>

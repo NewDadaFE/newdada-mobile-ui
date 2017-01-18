@@ -106,38 +106,39 @@ export default class MainContent extends React.Component {
   }
 
   //  配置的文档目录
-  getModuleData() {
-    const props = this.props;
-    const pathname = props.location.pathname;
-    console.log(pathname);
-    const moduleName = /^components/.test(pathname) ?
-      'components' : pathname.split('/').slice(0, 1).join('/');
+    getModuleData() {
+        const props = this.props;
+        const pathname = props.location.pathname;
+        const moduleName = /^components/.test(pathname) ?
+            'components' : pathname.split('/').slice(0, 2).join('/');
 
-      console.log("moduleName", moduleName);
-    return moduleName === 'components' || moduleName === 'docs' ?
-      [...props.picked.components, ...props.picked.docs] :
-      props.picked[moduleName];
-  }
+        console.log("moduleName", moduleName);
 
-  getMenuItems() {
-    // const moduleData = this.props.moduleData;
-    // const menuItems = utils.getMenuItems(moduleData, this.context.intl.locale);
-    const moduleData = this.getModuleData();
-    const menuItems = utils.getMenuItems(moduleData);
+        return moduleName === 'components' || moduleName === 'docs/vue' ?
+          [...props.picked.components, ...props.picked['docs/vue']] :
+          props.picked[moduleName];
+    }
 
-    const topLevel = this.generateSubMenuItems(menuItems.topLevel);
-    const subMenu = Object.keys(menuItems).filter(this.isNotTopLevel)
-      .sort((a, b) => config.categoryOrder[a] - config.categoryOrder[b])
-      .map((category) => {
-        const subMenuItems = this.generateSubMenuItems(menuItems[category]);
-        return (
-          <SubMenu title={<h4>{category}</h4>} key={category}>
-            {subMenuItems}
-          </SubMenu>
-        );
-      });
-    return [...topLevel, ...subMenu];
-  }
+    // 获取菜单项
+    getMenuItems() {
+        const moduleData = this.getModuleData();
+        const menuItems = utils.getMenuItems(moduleData);
+
+        const topLevel = this.generateSubMenuItems(menuItems.topLevel);
+        const subMenu = Object.keys(menuItems).filter(this.isNotTopLevel)
+            .sort((a, b) => config.categoryOrder[a] - config.categoryOrder[b])
+            .map((category) => {
+                const subMenuItems = this.generateSubMenuItems(menuItems[category]);
+
+                return (
+                  <SubMenu title={<h4>{category}</h4>} key={category}>
+                    {subMenuItems}
+                  </SubMenu>
+                );
+            });
+
+        return [...topLevel, ...subMenu];
+    }
 
   flattenMenu(menu) {
     if (menu.type === Menu.Item) {
@@ -164,56 +165,60 @@ export default class MainContent extends React.Component {
     return { prev, next };
   }
 
-  render() {
-    const props = this.props;
-    const activeMenuItem = this.getActiveMenuItem(props);
-    const menuItems = this.getMenuItems();
-    const { prev, next } = this.getFooterNav(menuItems, activeMenuItem);
+    render() {
+        const props = this.props;
+        const activeMenuItem = this.getActiveMenuItem(props);
+        const menuItems = this.getMenuItems();
+        const { prev, next } = this.getFooterNav(menuItems, activeMenuItem);
 
-    const moduleData = this.getModuleData();
-    const localizedPageData = props.localizedPageData;
+        const moduleData = this.getModuleData();
+        const localizedPageData = props.localizedPageData;
 
-    return (
-      <div className="main-wrapper">
-        <Row>
-          <Col lg={5} md={6} sm={24} xs={24}>
-            <Menu
-              className="aside-container" mode="inline"
-              openKeys={Object.keys(utils.getMenuItems(moduleData))}
-              selectedKeys={[activeMenuItem]}
-            >
-              {menuItems}
-            </Menu>
-          </Col>
-          <Col lg={19} md={18} sm={24} xs={24} className="main-container">
-            {
-              props.utils.get(props, 'pageData.demo') ? (
-                <ComponentDoc {...props} doc={localizedPageData} demos={props.demos} />
-              ) : <Article {...props} content={localizedPageData} />
-            }
-          </Col>
-        </Row>
-        <Row>
-          <Col
-            lg={{ span: 19, offset: 5 }}
-            md={{ span: 18, offset: 6 }}
-            sm={24} xs={24}
-          >
-            <section className="prev-next-nav">
-              {
-                prev ?
-                  React.cloneElement(prev.props.children, { className: 'prev-page' }) :
-                  null
-              }
-              {
-                next ?
-                  React.cloneElement(next.props.children, { className: 'next-page' }) :
-                  null
-              }
-            </section>
-          </Col>
-        </Row>
-      </div>
-    );
-  }
+        return (
+            <div className="main-wrapper">
+                <Row>
+                    {/* 左侧菜单 */}
+                    <Col lg={5} md={6} sm={24} xs={24}>
+                        {/* ul>li  */}
+                        <Menu
+                            className="aside-container" mode="inline"
+                            openKeys={Object.keys(utils.getMenuItems(moduleData))}
+                            selectedKeys={[activeMenuItem]}
+                        >
+                            {menuItems}
+                        </Menu>
+                    </Col>
+
+                    {/* 右侧文档展示区域 */}
+                    <Col lg={19} md={18} sm={24} xs={24} className="main-container">
+                        {
+                            props.utils.get(props, 'pageData.demo') ? (
+                                <ComponentDoc {...props} doc={localizedPageData} demos={props.demos} />
+                            ) : <Article {...props} content={localizedPageData} />
+                        }
+                    </Col>
+                </Row>
+                <Row>
+                    <Col
+                        lg={{ span: 19, offset: 5 }}
+                        md={{ span: 18, offset: 6 }}
+                        sm={24} xs={24}
+                    >
+                        <section className="prev-next-nav">
+                            {
+                                prev ?
+                                React.cloneElement(prev.props.children, { className: 'prev-page' }) :
+                                null
+                            }
+                            {
+                                next ?
+                                React.cloneElement(next.props.children, { className: 'next-page' }) :
+                                null
+                            }
+                        </section>
+                    </Col>
+                </Row>
+            </div>
+        );
+    }
 }

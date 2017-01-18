@@ -16,25 +16,28 @@ export function collectDocs(docs) {
 }
 
 export function getMenuItems(moduleData) {
-  const menuMeta = moduleData.map((item) => item.meta);
-  const menuItems = {};
-  menuMeta.sort((a, b) => (
-    parseInt(a.order, 10) - parseInt(b.order, 10)
-  )).forEach((meta) => {
-    const category = meta.category || 'topLevel';
-    if (!menuItems[category]) {
-      menuItems[category] = {};
-    }
+    const menuMeta = moduleData.map((item) => item.meta);
+    const menuItems = {};
 
-    const type = meta.type || 'topLevel';
-    if (!menuItems[category][type]) {
-      menuItems[category][type] = [];
-    }
+    menuMeta.sort((a, b) => (
+        parseInt(a.order, 10) - parseInt(b.order, 10)
+    )).forEach((meta) => {
+        const category = meta.category || 'topLevel';
 
-    menuItems[category][type].push(meta);
-  });
+        if (!menuItems[category]) {
+            menuItems[category] = {};
+        }
 
-  return menuItems;
+        const type = meta.type || 'topLevel';
+
+        if (!menuItems[category][type]) {
+            menuItems[category][type] = [];
+        }
+
+        menuItems[category][type].push(meta);
+    });
+
+    return menuItems;
 }
 
 export function ping(url, callback) {

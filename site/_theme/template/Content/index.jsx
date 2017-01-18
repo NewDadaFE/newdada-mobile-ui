@@ -8,7 +8,6 @@ const locale = (
     localStorage.getItem('locale') !== 'en-US'
 ) ? 'zh-CN' : 'en-US';
 
-console.log('locale:', locale);
 
 export function collect(nextProps, callback) {
     console.log('nextProps:', nextProps);

@@ -38,7 +38,7 @@ module.exports = {
         Combination: 6,
         Gesture: 5,
     },
-      typeOrder: {
+    typeOrder: {
         Layout: 0,
         Navigation: 1,
         'Data Entry': 2,
@@ -53,7 +53,7 @@ module.exports = {
         indexRoute: { component: './template/Home/index' },
         childRoutes: [
             {
-                path: '/docs/:children',
+                path: '/docs/vue/:children',
                 component: contentTmpl
             },
             {
