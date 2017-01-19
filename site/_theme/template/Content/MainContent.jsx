@@ -11,99 +11,104 @@ import config from '../../';
 const SubMenu = Menu.SubMenu;
 
 export default class MainContent extends React.Component {
-  static contextTypes = {
-    intl: React.PropTypes.object.isRequired,
-  }
+    static contextTypes = {
+        intl: React.PropTypes.object.isRequired,
+    }
 
-  componentDidMount() {
-    this.componentDidUpdate();
-  }
+    componentDidMount() {
+        this.componentDidUpdate();
+    }
 
-  componentDidUpdate() {
-    if (!location.hash) {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    } else {
-      if (this.timer) {
+    componentDidUpdate() {
+        if (!location.hash) {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        } else {
+            if (this.timer) {
+                clearTimeout(this.timer);
+            }
+            this.timer = setTimeout(() => {
+                document.getElementById(decodeURI(location.hash.replace('#', ''))).scrollIntoView();
+            }, 10);
+        }
+    }
+
+    componentWillUnmount() {
         clearTimeout(this.timer);
-      }
-      this.timer = setTimeout(() => {
-        document.getElementById(decodeURI(location.hash.replace('#', ''))).scrollIntoView();
-      }, 10);
     }
-  }
 
-  componentWillUnmount() {
-    clearTimeout(this.timer);
-  }
+    shouldComponentUpdate(nextProps) {
+        const pathname = this.props.location.pathname;
 
-  shouldComponentUpdate(nextProps) {
-    const pathname = this.props.location.pathname;
-    return pathname !== nextProps.location.pathname ||
-      /^\/components\//i.test(pathname);
-  }
-
-  getActiveMenuItem(props) {
-    return props.params.children || props.location.pathname;
-  }
-
-  fileNameToPath(filename) {
-    const snippets = filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '').split('/');
-    return snippets[snippets.length - 1];
-  }
-
-  generateMenuItem(isTop, item) {
-    const key = this.fileNameToPath(item.filename);
-    let text;
-    if (isTop) {
-      text = item.title || item.chinese || item.english;
-    } else {
-      text = [
-        (<span key="english">
-          {item.title || item.english}
-        </span>),
-        (<span className="chinese" key="chinese">
-          {item.subtitle || item.chinese}
-        </span>),
-      ];
+        return pathname !== nextProps.location.pathname ||
+        /^\/components\//i.test(pathname);
     }
-    const disabled = item.disabled;
-    const url = item.filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '').toLowerCase();
-    const child = !item.link ?
-      (<Link to={/^components/.test(url) ? `${url}/` : url} disabled={disabled}>
-        {text}
-      </Link>) :
-      (<a href={item.link} target="_blank" rel="noopener noreferrer" disabled={disabled}>
-        {text}
-      </a>);
 
-    return (
-      <Menu.Item key={key.toLowerCase()} disabled={disabled}>
-        {child}
-      </Menu.Item>
-    );
-  }
+    getActiveMenuItem(props) {
+        return props.params.children || props.location.pathname;
+    }
 
-  isNotTopLevel(level) {
-    return level !== 'topLevel';
-  }
+    fileNameToPath(filename) {
+        const snippets = filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '').split('/');
 
-  generateSubMenuItems(obj) {
-    const topLevel = (obj.topLevel || []).map(this.generateMenuItem.bind(this, true));
-    const itemGroups = Object.keys(obj).filter(this.isNotTopLevel)
-      .sort((a, b) => config.typeOrder[a] - config.typeOrder[b])
-      .map((type, index) => {
-        const groupItems = obj[type].sort((a, b) => (
-          (a.title || a.english).charCodeAt(0) - (b.title || b.english).charCodeAt(0)
-        )).map(this.generateMenuItem.bind(this, false));
+        return snippets[snippets.length - 1];
+    }
+
+    generateMenuItem(isTop, item) {
+        const key = this.fileNameToPath(item.filename);
+        let text;
+
+        if (isTop) {
+            text = item.title || item.chinese || item.english;
+        } else {
+            text = [
+                (<span key="english">
+                    {item.title || item.english}
+                </span>),
+                (<span className="chinese" key="chinese">
+                    {item.subtitle || item.chinese}
+                </span>),
+            ];
+        }
+        const disabled = item.disabled;
+        const url = item.filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '').toLowerCase();
+        const child = !item.link ?
+            (<Link to={/^components/.test(url) ? `${url}/` : url} disabled={disabled}>
+                {text}
+            </Link>) :
+            (<a href={item.link} target="_blank" rel="noopener noreferrer" disabled={disabled}>
+                {text}
+            </a>);
+
         return (
-          <Menu.ItemGroup title={type} key={index}>
-            {groupItems}
-          </Menu.ItemGroup>
+            <Menu.Item key={key.toLowerCase()} disabled={disabled}>
+                {child}
+            </Menu.Item>
         );
-      });
-    return [...topLevel, ...itemGroups];
-  }
+    }
+
+    isNotTopLevel(level) {
+        return level !== 'topLevel';
+    }
+
+    generateSubMenuItems(obj) {
+        const topLevel = (obj.topLevel || []).map(this.generateMenuItem.bind(this, true));
+        const itemGroups = Object.keys(obj).filter(this.isNotTopLevel)
+            .sort((a, b) => config.typeOrder[a] - config.typeOrder[b])
+            .map((type, index) => {
+                const groupItems = obj[type].sort((a, b) => (
+                    (a.title || a.english).charCodeAt(0) - (b.title || b.english).charCodeAt(0)
+                )).map(this.generateMenuItem.bind(this, false));
+
+                return (
+                    <Menu.ItemGroup title={type} key={index}>
+                        {groupItems}
+                    </Menu.ItemGroup>
+                );
+            });
+
+        return [...topLevel, ...itemGroups];
+    }
 
   //  配置的文档目录
     getModuleData() {
@@ -111,8 +116,6 @@ export default class MainContent extends React.Component {
         const pathname = props.location.pathname;
         const moduleName = /^components/.test(pathname) ?
             'components' : pathname.split('/').slice(0, 2).join('/');
-
-        console.log("moduleName", moduleName);
 
         return moduleName === 'components' || moduleName === 'docs/vue' ?
           [...props.picked.components, ...props.picked['docs/vue']] :
@@ -131,39 +134,41 @@ export default class MainContent extends React.Component {
                 const subMenuItems = this.generateSubMenuItems(menuItems[category]);
 
                 return (
-                  <SubMenu title={<h4>{category}</h4>} key={category}>
-                    {subMenuItems}
-                  </SubMenu>
+                    <SubMenu title={<h4>{category}</h4>} key={category}>
+                        {subMenuItems}
+                    </SubMenu>
                 );
             });
 
         return [...topLevel, ...subMenu];
     }
 
-  flattenMenu(menu) {
-    if (menu.type === Menu.Item) {
-      return menu;
+    flattenMenu(menu) {
+        if (menu.type === Menu.Item) {
+            return menu;
+        }
+
+        if (Array.isArray(menu)) {
+            return menu.reduce((acc, item) => acc.concat(this.flattenMenu(item)), []);
+        }
+
+        return this.flattenMenu(menu.props.children);
     }
 
-    if (Array.isArray(menu)) {
-      return menu.reduce((acc, item) => acc.concat(this.flattenMenu(item)), []);
+    getFooterNav(menuItems, activeMenuItem) {
+        const menuItemsList = this.flattenMenu(menuItems);
+        let activeMenuItemIndex = -1;
+
+        menuItemsList.forEach((menuItem, i) => {
+            if (menuItem.key === activeMenuItem) {
+                activeMenuItemIndex = i;
+            }
+        });
+        const prev = menuItemsList[activeMenuItemIndex - 1];
+        const next = menuItemsList[activeMenuItemIndex + 1];
+
+        return { prev, next };
     }
-
-    return this.flattenMenu(menu.props.children);
-  }
-
-  getFooterNav(menuItems, activeMenuItem) {
-    const menuItemsList = this.flattenMenu(menuItems);
-    let activeMenuItemIndex = -1;
-    menuItemsList.forEach((menuItem, i) => {
-      if (menuItem.key === activeMenuItem) {
-        activeMenuItemIndex = i;
-      }
-    });
-    const prev = menuItemsList[activeMenuItemIndex - 1];
-    const next = menuItemsList[activeMenuItemIndex + 1];
-    return { prev, next };
-  }
 
     render() {
         const props = this.props;
