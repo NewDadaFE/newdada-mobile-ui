@@ -1,5 +1,4 @@
 import React from 'react';
-import Select from 'antd/lib/select';
 
 export default class Footer extends React.Component {
     render() {
