@@ -16,6 +16,7 @@ const isZhCN = (window.localStorage && localStorage.getItem('locale') !== 'en-US
   // (navigator.language === 'zh-CN');
 
 const appLocale = isZhCN ? config.zhLocale : config.enLocale;
+
 addLocaleData(appLocale.data);
 
 let gaListenerSetted = false;
@@ -25,25 +26,26 @@ export default class Layout extends React.Component {
         router: React.PropTypes.object.isRequired,
     };
 
-  componentDidMount() {
-    if (typeof ga !== 'undefined' && !gaListenerSetted) {
-      this.context.router.listen((loc) => {
-        window.ga('send', 'pageview', loc.pathname + loc.search);
-      });
-      gaListenerSetted = true;
+    componentDidMount() {
+        if (typeof ga !== 'undefined' && !gaListenerSetted) {
+            this.context.router.listen((loc) => {
+                window.ga('send', 'pageview', loc.pathname + loc.search);
+            });
+            gaListenerSetted = true;
+        }
     }
-  }
 
-  render() {
-    const props = this.props;
-    return (
-      <IntlProvider locale={appLocale.locale} messages={appLocale.messages}>
-        <div className="page-wrapper">
-          <Header {...props} />
-          {props.children}
-          <Footer />
-        </div>
-      </IntlProvider>
-    );
-  }
+    render() {
+        const props = this.props;
+
+        return (
+            <IntlProvider locale={appLocale.locale} messages={appLocale.messages}>
+                <div className="page-wrapper">
+                    <Header {...props} />
+                    {props.children}
+                    <Footer />
+                </div>
+            </IntlProvider>
+        );
+    }
 }
