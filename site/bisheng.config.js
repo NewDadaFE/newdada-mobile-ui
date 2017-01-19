@@ -36,11 +36,11 @@ module.exports = {
     htmlTemplate: path.join(__dirname, './_theme/static/template.html'),
     webpackConfig(config) { // webpack 配置文件
         config.externals = {
-            react: 'React',
-            'react-dom': 'ReactDOM',
-            'react-router': 'ReactRouter',
-            history: 'History',
-            'babel-polyfill': 'this', // hack babel-polyfill has no exports
+            // react: 'React',
+            // 'react-dom': 'ReactDOM',
+            // 'react-router': 'ReactRouter',
+            // history: 'History',
+            // 'babel-polyfill': 'this', // hack babel-polyfill has no exports
         };
 
         config.babel.plugins.push([
