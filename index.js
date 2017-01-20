@@ -23,7 +23,7 @@ webpackJsonp([7,6],[
 	    hash = _window$location.hash;
 
 	var location = '' + pathname + search + hash;
-	var basename = '/';
+	var basename = '/newdada-mobile-ui/';
 	ReactRouter.match({ routes: routes, location: location, basename: basename }, function () {
 	  var router = React.createElement(ReactRouter.Router, {
 	    history: ReactRouter.useRouterHistory(history.createHistory)({ basename: basename }),
