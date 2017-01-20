@@ -52,7 +52,7 @@ module.exports = {
         ]);
         return config;
     },
-    root: '/',
+    root: '/newdada-mobile-ui/',
     plugins: [ // 插件
         'bisheng-plugin-description',
         'bisheng-plugin-toc?maxDepth=2',
