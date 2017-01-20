@@ -1,7 +1,8 @@
 {
   "version": "0.1.0",
   "scripts": {
-    "start": "bisheng start -c ./site/bisheng.config.js --no-livereload"
+    "start": "bisheng start -c ./site/bisheng.config.js --no-livereload",
+    "deploy": "bisheng build -c ./site/bisheng.config.js && bisheng gh-pages --push-only"
   },
   "dependencies": {
     "antd": "^2.6.1",
