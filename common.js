@@ -30,7 +30,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		6:0
+/******/ 		8:0
 /******/ 	};
 
 /******/ 	// The require function
@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 
-/******/ 			script.src = __webpack_require__.p + "" + ({"0":"components/button/demo","1":"docs/vue/introduce.zh-CN.md","2":"docs/vue/getting-started.zh-CN.md","3":"docs/vue/doc.zh-CN.md","4":"components/button/index.md","5":"components/badge/index.md","7":"index"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + ({"0":"components/button/demo","1":"components/toast/demo","2":"docs/vue/introduce.zh-CN.md","3":"docs/vue/getting-started.zh-CN.md","4":"docs/vue/doc.zh-CN.md","5":"components/toast/index.md","6":"components/button/index.md","7":"components/badge/index.md","9":"index"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
