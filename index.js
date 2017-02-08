@@ -9273,7 +9273,7 @@ webpackJsonp([9,8],[
 	            'code-box-expand-trigger-active': expand
 	        });
 
-	        var protocol = 'http:';
+	        var protocol = 'https:';
 	        var path = doc.meta.filename.split('/')[1];
 	        var host = 'newdadafe.github.io';
 	        var demoUrl = protocol + '/' + host + '/' + path + '/';
