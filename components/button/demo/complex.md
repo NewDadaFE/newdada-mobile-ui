@@ -6,26 +6,78 @@ title: 应用场景示例
 和 List / Flex 结合使用示例
 
 ````jsx
-import { Button, List } from 'antd-mobile';
+<template>
+    <div>
+        <group-title>theme</group-title>
+        <group>
+            <cell>
+                <btn theme="primary" @click="clickHandle('Vue 2.0')">primary</btn>
+                <btn theme="secondary">secondary</btn>
+                <btn theme="default">default</btn>
+            </cell>
+        </group>
+        <group-title>hollow</group-title>
+        <group>
+            <cell class="bg-inverse">
+                <btn hollow theme="primary">primary</btn>
+                <btn hollow theme="secondary">secondary</btn>
+                <btn hollow theme="default">default</btn>
+            </cell>
+        </group>
+        <group-title>shape="pill"</group-title>
+        <group>
+            <cell>
+                <btn shape="pill" theme="primary">primary</btn>
+                <btn shape="pill" theme="secondary">secondary</btn>
+                <btn shape="pill" theme="default">default</btn>
+            </cell>
+        </group>
+        <group-title>loading</group-title>
+        <group>
+            <cell>
+                <btn theme="primary" loading>loading</btn>
+                <btn theme="default" loading>保存中</btn>
+            </cell>
+        </group>
+        <group-title>disabled</group-title>
+        <group>
+            <cell>
+                <btn disabled theme="primary">primary</btn>
+                <btn disabled theme="secondary">secondary</btn>
+                <btn disabled theme="default">default</btn>
+            </cell>
+        </group>
+        <group-title>size</group-title>
+        <group>
+            <cell>
+                <btn size="sm" hollow theme="primary">small</btn>
+                <btn theme="primary">normal</btn>
+                <btn size="lg" theme="primary">large</btn>
+            </cell>
+        </group>
+        <group-title>block</group-title>
+        <group>
+            <cell>
+                <btn block size="lg" theme="primary">primary</btn>
+            </cell>
+            <cell>
+                <btn block size="lg" theme="secondary">secondary</btn>
+            </cell>
+            <cell>
+                <btn block size="lg" theme="default">default</btn>
+            </cell>
+        </group>
+    </div>
+</template>
 
-ReactDOM.render(
-  <List style={{ margin: '0.1rem 0', backgroundColor: 'white' }}>
-    <List.Item
-      extra={<Button type="ghost" size="small" inline>small</Button>}
-      multipleLine
-    >
-      区域经理
-      <List.Item.Brief>可进行收款、退款、折扣管理、查看数据等操作</List.Item.Brief>
-    </List.Item>
-    <List.Item
-      extra={<Button type="primary" size="small" inline>small</Button>}
-      multipleLine
-    >
-      区域经理
-      <List.Item.Brief>可进行收款、退款、折扣管理、查看数据等操作</List.Item.Brief>
-    </List.Item>
-  </List>,
-  mountNode
-);
+<script>
+    export default {
+        methods: {
+            clickHandle(message) {
+                this.$toast(`hello ${message}`);
+            },
+        },
+    };
+</script>
 
 ````

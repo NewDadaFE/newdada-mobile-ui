@@ -6,40 +6,77 @@ title: 类型、尺寸
 按钮
 
 ````jsx
-import { Button, Flex } from 'antd-mobile';
+<template>
+    <div>
+        <group-title>theme</group-title>
+        <group>
+            <cell>
+                <btn theme="primary" @click="clickHandle('Vue 2.0')">primary</btn>
+                <btn theme="secondary">secondary</btn>
+                <btn theme="default">default</btn>
+            </cell>
+        </group>
+        <group-title>hollow</group-title>
+        <group>
+            <cell class="bg-inverse">
+                <btn hollow theme="primary">primary</btn>
+                <btn hollow theme="secondary">secondary</btn>
+                <btn hollow theme="default">default</btn>
+            </cell>
+        </group>
+        <group-title>shape="pill"</group-title>
+        <group>
+            <cell>
+                <btn shape="pill" theme="primary">primary</btn>
+                <btn shape="pill" theme="secondary">secondary</btn>
+                <btn shape="pill" theme="default">default</btn>
+            </cell>
+        </group>
+        <group-title>loading</group-title>
+        <group>
+            <cell>
+                <btn theme="primary" loading>loading</btn>
+                <btn theme="default" loading>保存中</btn>
+            </cell>
+        </group>
+        <group-title>disabled</group-title>
+        <group>
+            <cell>
+                <btn disabled theme="primary">primary</btn>
+                <btn disabled theme="secondary">secondary</btn>
+                <btn disabled theme="default">default</btn>
+            </cell>
+        </group>
+        <group-title>size</group-title>
+        <group>
+            <cell>
+                <btn size="sm" hollow theme="primary">small</btn>
+                <btn theme="primary">normal</btn>
+                <btn size="lg" theme="primary">large</btn>
+            </cell>
+        </group>
+        <group-title>block</group-title>
+        <group>
+            <cell>
+                <btn block size="lg" theme="primary">primary</btn>
+            </cell>
+            <cell>
+                <btn block size="lg" theme="secondary">secondary</btn>
+            </cell>
+            <cell>
+                <btn block size="lg" theme="default">default</btn>
+            </cell>
+        </group>
+    </div>
+</template>
 
-/* eslint global-require: 0 */
-const ButtonExample = React.createClass({
-  render() {
-    return (<div className="btn-container">
-      <div style={{ margin: '0 0.16rem' }}>
-        <Button className="btn" type="primary">primary 按钮</Button>
-        <Button className="btn" disabled onClick={e => console.log(e)}>disabled 按钮</Button>
-        <Button className="btn" loading>loading 按钮</Button>
-        <Button className="btn" icon="check-circle-o">带图标按钮</Button>
-        <Button className="btn" icon={require('!svg-sprite!./reload.svg')}>本地图标</Button>
-
-        <div style={{ height: '0.16rem' }} />
-        <Button className="btn" activeStyle={false}>无点击反馈</Button>
-        <Button className="btn" activeStyle={{ backgroundColor: 'red' }}>自定义点击反馈 style</Button>
-
-        <p style={{ margin: 10, color: '#999' }}>inline / small</p>
-        <Flex style={{ marginBottom: '0.16rem' }}>
-          <Button type="primary" inline style={{ marginRight: '0.08rem' }}>inline</Button>
-          <Button type="ghost" inline size="small" style={{ marginRight: '0.08rem' }}>inline small</Button>
-          <Button type="primary" inline size="small">inline small</Button>
-        </Flex>
-      </div>
-    </div>);
-  },
-});
-ReactDOM.render(<ButtonExample />, mountNode);
-````
-````css
-.btn-container {
-  margin: 0.32rem 0;
-}
-.btn-container .btn {
-  margin: 0.16rem 0;
-}
+<script>
+    export default {
+        methods: {
+            clickHandle(message) {
+                this.$toast(`hello ${message}`);
+            },
+        },
+    };
+</script>
 ````

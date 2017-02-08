@@ -16,6 +16,8 @@ $ npm install
 
 $ npm start
 
+# 浏览器范围 http://localhost:8000
+$ open http://localhost:8000
 ```
 
 ## License
