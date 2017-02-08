@@ -19,6 +19,10 @@ $ npm start
 # 浏览器范围 http://localhost:8000
 $ open http://localhost:8000
 ```
+## 发布站点
+```sh
+$ npm run deploy
+```
 
 ## License
 MIT © NewDadaFE
