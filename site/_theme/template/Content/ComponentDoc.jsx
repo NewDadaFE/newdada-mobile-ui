@@ -128,7 +128,7 @@ export default class ComponentDoc extends React.Component {
             'code-box-expand-trigger-active': expand,
         });
 
-        const protocol = 'http:';
+        const protocol = 'https:';
         const path = doc.meta.filename.split('/')[1];
         const host = 'newdadafe.github.io';
         const demoUrl = `${protocol}/${host}/${path}/`;
