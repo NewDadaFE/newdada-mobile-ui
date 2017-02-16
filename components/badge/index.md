@@ -6,4 +6,4 @@ english: Badge
 source: design
 ---
 
-用于消息提示，数量显示等。
+用于新消息提示，数量显示等。
